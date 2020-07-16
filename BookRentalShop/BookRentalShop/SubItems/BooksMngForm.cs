@@ -21,9 +21,9 @@ namespace BookRentalShop.SubItems
 
         private void DevMngForm_Load(object sender, EventArgs e)
         {
-            InitControls();
             UpdateCombDivision();
             UpdateData();
+            InitControls();
             GrdBooksTbl.ReadOnly = true;
         }
 
@@ -43,13 +43,13 @@ namespace BookRentalShop.SubItems
                 temps.Add("선택", "");
                 while (reader.Read())
                 {
-                    temps.Add(reader[0].ToString(), reader[1].ToString());
+                    temps.Add(reader[1].ToString(), reader[0].ToString());
                 }
 
                 Divistion.DataSource = new BindingSource(temps, null);
                 Divistion.DisplayMember = "Key";
                 Divistion.ValueMember = "Value";
-                Divistion.SelectedIndex = -1;
+                //Divistion.SelectedIndex = -1;
             }
         }
 
@@ -68,7 +68,8 @@ namespace BookRentalShop.SubItems
                                    "         b.Price " +
                                    "     FROM bookstbl AS b " +
                                    "     INNER JOIN divtbl AS d " +
-                                   "     ON b.Division = d.Division ";
+                                   "     ON b.Division = d.Division " +
+                                   "     ORDER BY b.Idx ASC";
                 conn.Open();
                 //커맨드 생성
                 MySqlCommand cmd = new MySqlCommand();
@@ -91,18 +92,18 @@ namespace BookRentalShop.SubItems
             DataGridViewColumn column;
 
             column = GrdBooksTbl.Columns[0];
-            column.Width = 100;
+            column.Width = 53;
             column.HeaderText = "번호";
 
             column = GrdBooksTbl.Columns[1];
-            column.Width = 150;
+            column.Width = 170;
             column.HeaderText = "저자명";
 
             column = GrdBooksTbl.Columns[2];
             column.Visible = false;
 
             column = GrdBooksTbl.Columns[3];
-            column.Width = 150;
+            column.Width = 90;
             column.HeaderText = "장르";
 
             column = GrdBooksTbl.Columns[4];
@@ -110,16 +111,24 @@ namespace BookRentalShop.SubItems
             column.HeaderText = "이름";
 
             column = GrdBooksTbl.Columns[5];
-            column.Width = 150;
+            column.Width = 120;
             column.HeaderText = "출간일";
 
             column = GrdBooksTbl.Columns[6];
-            column.Width = 150;
+            column.Width = 120;
             column.HeaderText = "ISBN";
+
+            column = GrdBooksTbl.Columns[7];
+            column.Width = 90;
+            column.HeaderText = "가격";
         }
         private void SaveData()
-        {
-            if (string.IsNullOrEmpty(IDX.Text) || string.IsNullOrEmpty(Author.Text))
+        {   
+            //빈값 비교
+            if (string.IsNullOrEmpty(Author.Text)
+                || Divistion.SelectedIndex<1
+                || string.IsNullOrEmpty(Names.Text) 
+                || string.IsNullOrEmpty(Isbn.Text))
             {
                 MetroMessageBox.Show(this, "빈값은 넣을 수 없습니다", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -144,43 +153,67 @@ namespace BookRentalShop.SubItems
                     //쿼리문
                     if (myMode == BaseMode.UPDATE)
                     {
-                        cmd.CommandText = "UPDATE divtbl " +
-                                      "   SET Names = @Names " +
-                                      " WHERE Division = @Division";
+                        cmd.CommandText = "UPDATE bookstbl "+
+                                             "SET " +
+                                                 "Author = @Author, " +
+                                                  "Division = @Division, " +
+                                                  "Names = @Names, " +
+                                                  "ReleaseDate = @ReleaseDate, " +
+                                                  "ISBN = @ISBN, " +
+                                                  "Price = @Price " +
+                                          "WHERE Idx = @Idx";
                     }
                     else if (myMode == BaseMode.INSERT)
                     {
-                        cmd.CommandText = "INSERT INTO divtbl (Division, Names) " +
-                                          "VALUES (@Division, @Names)";
+                        cmd.CommandText = "INSERT INTO bookstbl " +
+                                                "(" +
+                                                "   Author, "+
+                                                "   Division, " +
+                                                "   Names, " +
+                                                "   ReleaseDate, " +
+                                                "   ISBN, " +
+                                                "   Price" +
+                                                ") " +
+                                           "VALUES " +
+                                                "(" +
+                                                "   @Author, " +
+                                                "   @Division, " +
+                                                "   @Names, " +
+                                                "   @ReleaseDate, " +
+                                                "   @ISBN, " +
+                                                "   @Price" +
+                                                ")";
                     }
-                    else if (myMode == BaseMode.DELETE)
-                    {
-                        cmd.CommandText = "DELETE FROM divtbl " +
-                                      "WHERE Division = @Division";
-                    }
+
                     //쿼리문  파라미터 대입 실행
-                    if(myMode == BaseMode.UPDATE || myMode == BaseMode.INSERT)
+                    //파라미터 생성
+                    MySqlParameter paraAuthor = new MySqlParameter("@Author", MySqlDbType.VarChar, 45);
+                    MySqlParameter paraDivision = new MySqlParameter("@Division", MySqlDbType.VarChar, 4);
+                    MySqlParameter paraNames = new MySqlParameter("@Names", MySqlDbType.VarChar, 100);
+                    MySqlParameter paraReleaseDate = new MySqlParameter("@ReleaseDate", MySqlDbType.Date);
+                    MySqlParameter paraISBN = new MySqlParameter("@ISBN", MySqlDbType.VarChar, 13);
+                    MySqlParameter paraPrice = new MySqlParameter("@Price", MySqlDbType.Decimal);
+                    //파라미너 값 set
+                    paraAuthor.Value = Author.Text;
+                    paraDivision.Value = Divistion.SelectedValue;
+                    paraNames.Value = Names.Text;
+                    paraReleaseDate.Value = DateRelease.Value;
+                    paraISBN.Value = Isbn.Text;
+                    paraPrice.Value = Price.Text;
+                    //쿼리문 파라미터 set
+                    cmd.Parameters.Add(paraAuthor);
+                    cmd.Parameters.Add(paraDivision);
+                    cmd.Parameters.Add(paraNames);
+                    cmd.Parameters.Add(paraReleaseDate);
+                    cmd.Parameters.Add(paraISBN);
+                    cmd.Parameters.Add(paraPrice);
+                    if(myMode == BaseMode.UPDATE)
                     {
-                        //파라미터 생성
-                        MySqlParameter paraNames = new MySqlParameter("@Names", MySqlDbType.VarChar, 45);
-                        MySqlParameter paraDivision = new MySqlParameter("@Division", MySqlDbType.VarChar, 45);
-                        //파라미너 값 set
-                        paraNames.Value = Author.Text;
-                        paraDivision.Value = IDX.Text;
-                        //쿼리문 파라미터 set
-                        cmd.Parameters.Add(paraNames);
-                        cmd.Parameters.Add(paraDivision);
+                        MySqlParameter paraIdx = new MySqlParameter("@Idx", MySqlDbType.Int32);
+                        paraIdx.Value = IDX.Text;
+                        cmd.Parameters.Add(paraIdx);
                     }
-                    else if(myMode == BaseMode.DELETE)
-                    {
-                        //파라미터 생성
-                        MySqlParameter paraDivision = new MySqlParameter("@Division", MySqlDbType.VarChar);
-                        //파라미너 값 set
-                        paraDivision.Value = IDX.Text;
-                        //쿼리문 파라미터 set
-                        cmd.Parameters.Add(paraDivision);
-                    }
-                    
+
                     //결과 값 몇개 실행 되었는가
                     var result = cmd.ExecuteNonQuery();
 
@@ -192,10 +225,6 @@ namespace BookRentalShop.SubItems
                     else if (myMode == BaseMode.UPDATE)
                     {
                         MetroMessageBox.Show(this, $"{result}건이 수정 되었습니다.", "수정");
-                    }
-                    else if(myMode == BaseMode.DELETE)
-                    {
-                        MetroMessageBox.Show(this, $"{result}건이 삭제 되었습니다.", "삭제");
                     }
 
                     //결과 출력후 텍스트 박스 초기화
@@ -216,9 +245,36 @@ namespace BookRentalShop.SubItems
             //셀선택시 셀 내용 클릭시만 반응
             if(e.RowIndex > -1)
             {
+                //클릭시 입력 컨트롤에 데이터 할당
                 DataGridViewRow data = GrdBooksTbl.Rows[e.RowIndex];
                 IDX.Text = data.Cells[0].Value.ToString();
                 Author.Text = data.Cells[1].Value.ToString();
+
+                //장르 콤보박스 cells[2]
+                //글자로 인덱스  찾기
+                //Divistion.SelectedIndex = Divistion.FindString(data.Cells[3].Value.ToString());
+                //코드 값을 그대로 할당
+                Divistion.SelectedValue = data.Cells[2].Value.ToString();
+
+                //이름
+                Names.Text = data.Cells[4].Value.ToString();
+                
+                //출간일 날짜 피커 cells[5]
+                DateRelease.CustomFormat = "yyyy-MM-dd";
+                DateRelease.Format = DateTimePickerFormat.Custom;
+                DateRelease.Value = (DateTime)data.Cells[5].Value;
+
+                //Isbn
+                Isbn.Text = data.Cells[6].Value.ToString();
+
+                //price
+                Price.Text = data.Cells[7].Value.ToString();
+
+                
+
+                //출간일 날자 피커
+
+
 
                 IDX.ReadOnly = true;
                 myMode = BaseMode.UPDATE;//수정 모드 변경
@@ -228,56 +284,27 @@ namespace BookRentalShop.SubItems
         private void InitControls()
         {
             IDX.Text = Author.Text = string.Empty;
+            Isbn.Text = Names.Text = Price.Text = string.Empty;
+            Divistion.SelectedIndex = 0;
+            IDX.ReadOnly = true;
             IDX.Focus();
 
-            myMode = BaseMode.NONE;
+            DateRelease.CustomFormat = "yyyy-MM-dd";
+            DateRelease.Format = DateTimePickerFormat.Custom;
+            DateRelease.Value = DateTime.Now;
 
-            #region
-            //콤보박스 데이터 바인딩
-            //Dictionary<string, string> dic = new Dictionary<string, string>();
-            //dic.Add("선택", "00");
-            //dic.Add("서울특별시", "11");
-            //dic.Add("부산광역시", "21");
-            //dic.Add("대구광역시", "22");
-            //dic.Add("인천광역시", "23");
-            //dic.Add("광주광역시", "24");
-
-            //Divistion.DataSource = new BindingSource(dic, null);
-            //Divistion.DisplayMember = "Key";
-            //Divistion.ValueMember = "Value";
-            #endregion
+            myMode = BaseMode.INSERT;
         }
         private void BtnSave_Click(object sender, EventArgs e)
         {
             SaveData();
+            InitControls();
         }
         private void BtnNew_Click(object sender, EventArgs e)
         {
-            IDX.Text = Author.Text = string.Empty;
-            IDX.ReadOnly = false;
-            myMode = BaseMode.INSERT;
-            IDX.Focus();
-        }
-        private void BtmDelete_Click(object sender, EventArgs e)
-        {
-            if(myMode != BaseMode.UPDATE)
-            {
-                MetroMessageBox.Show(this, "삭제할 데이터를 선택하세요", "알림");
-                return;
-            }
-            else if(myMode == BaseMode.UPDATE)
-            {
-                myMode = BaseMode.DELETE;
-                SaveData();
-            }
-        }
+            InitControls();
 
-        private void Divistion_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(Divistion.SelectedIndex > 0)
-            {
-                MessageBox.Show(Divistion.SelectedValue.ToString());
-            }
+            IDX.Focus();
         }
     }
 }

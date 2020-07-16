@@ -113,6 +113,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubItems\UserMngForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubItems\UserMngForm.Designer.cs">
+      <DependentUpon>UserMngForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SubItems\Commens.cs" />
     <Compile Include="SubItems\BooksMngForm.cs">
       <SubType>Form</SubType>
@@ -144,6 +150,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SubItems\UserMngForm.resx">
+      <DependentUpon>UserMngForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SubItems\BooksMngForm.resx">
       <DependentUpon>BooksMngForm.cs</DependentUpon>
     </EmbeddedResource>

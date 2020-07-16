@@ -45,6 +45,11 @@ namespace BookRentalShop
             BooksMngForm form = new BooksMngForm();
             ShowFormControl(form, "도서 관리");
         }
+        private void UserMng_Click(object sender, EventArgs e)
+        {
+            UserMngForm form = new UserMngForm();
+            ShowFormControl(form, "사용자 관리");
+        }
         private void ShowFormControl(Form form, string text)
         {
             form.MdiParent = this;

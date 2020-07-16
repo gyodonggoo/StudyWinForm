@@ -35,6 +35,7 @@
             this.BooksMange = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.MnuExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.UserMng = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +54,7 @@
             this.MnuMng.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MnuCoMng,
             this.BooksMange,
+            this.UserMng,
             this.toolStripMenuItem1,
             this.MnuExit});
             this.MnuMng.Name = "MnuMng";
@@ -85,6 +87,13 @@
             this.MnuExit.Size = new System.Drawing.Size(180, 22);
             this.MnuExit.Text = "끝내기(&x)";
             // 
+            // UserMng
+            // 
+            this.UserMng.Name = "UserMng";
+            this.UserMng.Size = new System.Drawing.Size(180, 22);
+            this.UserMng.Text = "사용자 관리 (&u)";
+            this.UserMng.Click += new System.EventHandler(this.UserMng_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -116,6 +125,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem MnuExit;
         private System.Windows.Forms.ToolStripMenuItem BooksMange;
+        private System.Windows.Forms.ToolStripMenuItem UserMng;
     }
 }
 
