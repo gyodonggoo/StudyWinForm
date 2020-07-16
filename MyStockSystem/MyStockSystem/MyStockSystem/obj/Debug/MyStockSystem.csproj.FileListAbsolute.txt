@@ -1,0 +1,14 @@
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\bin\Debug\MyStockSystem.exe.config
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\bin\Debug\MyStockSystem.exe
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\bin\Debug\MyStockSystem.pdb
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\bin\Debug\MetroFramework.dll
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\bin\Debug\MetroFramework.Fonts.dll
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\obj\Debug\MyStockSystem.csprojAssemblyReference.cache
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\obj\Debug\MyStockSystem.MainForm.resources
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\obj\Debug\MyStockSystem.Properties.Resources.resources
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\obj\Debug\MyStockSystem.csproj.GenerateResource.cache
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\obj\Debug\MyStockSystem.csproj.CoreCompileInputs.cache
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\obj\Debug\MyStockSystem.csproj.CopyComplete
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\obj\Debug\MyStockSystem.exe
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\obj\Debug\MyStockSystem.pdb
+C:\PKNU2020\MyStockSystem\MyStockSystem\MyStockSystem\obj\Debug\MyStockSystem.SubItems.SearItemFrom.resources

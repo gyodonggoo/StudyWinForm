@@ -36,28 +36,27 @@
             this.countryNmae = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countryEnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.continent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CountryImage = new System.Windows.Forms.PictureBox();
             this.Tab = new MetroFramework.Controls.MetroTabControl();
             this.CountryInfo = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTile1 = new MetroFramework.Controls.MetroTile();
-            this.metroTile2 = new MetroFramework.Controls.MetroTile();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.tBasic = new MetroFramework.Controls.MetroLabel();
+            this.tCountryEnName = new MetroFramework.Controls.MetroLabel();
+            this.tContinent = new MetroFramework.Controls.MetroLabel();
+            this.tCountryNmae = new MetroFramework.Controls.MetroLabel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroTile3 = new MetroFramework.Controls.MetroTile();
-            this.tCountryNmae = new MetroFramework.Controls.MetroLabel();
-            this.tContinent = new MetroFramework.Controls.MetroLabel();
-            this.tCountryEnName = new MetroFramework.Controls.MetroLabel();
-            this.tBasic = new MetroFramework.Controls.MetroLabel();
+            this.metroTile2 = new MetroFramework.Controls.MetroTile();
+            this.metroTile1 = new MetroFramework.Controls.MetroTile();
+            this.CountryImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CountryImage)).BeginInit();
             this.Tab.SuspendLayout();
             this.CountryInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CountryImage)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -144,18 +143,9 @@
             this.continent.HeaderText = "대륙";
             this.continent.Name = "continent";
             // 
-            // CountryImage
-            // 
-            this.CountryImage.Location = new System.Drawing.Point(31, 29);
-            this.CountryImage.Name = "CountryImage";
-            this.CountryImage.Size = new System.Drawing.Size(164, 106);
-            this.CountryImage.TabIndex = 0;
-            this.CountryImage.TabStop = false;
-            // 
             // Tab
             // 
             this.Tab.Controls.Add(this.CountryInfo);
-            this.Tab.Controls.Add(this.metroTabPage2);
             this.Tab.Location = new System.Drawing.Point(3, 160);
             this.Tab.Name = "Tab";
             this.Tab.SelectedIndex = 0;
@@ -182,40 +172,37 @@
             this.CountryInfo.Text = "국가 기본 정보";
             this.CountryInfo.VerticalScrollbarBarColor = true;
             // 
-            // metroTabPage2
+            // tBasic
             // 
-            this.metroTabPage2.HorizontalScrollbarBarColor = true;
-            this.metroTabPage2.Location = new System.Drawing.Point(4, 36);
-            this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(767, 437);
-            this.metroTabPage2.TabIndex = 1;
-            this.metroTabPage2.Text = "국가 관광 정보";
-            this.metroTabPage2.VerticalScrollbarBarColor = true;
+            this.tBasic.AutoSize = true;
+            this.tBasic.Location = new System.Drawing.Point(35, 191);
+            this.tBasic.Name = "tBasic";
+            this.tBasic.Size = new System.Drawing.Size(0, 0);
+            this.tBasic.TabIndex = 9;
             // 
-            // metroTile1
+            // tCountryEnName
             // 
-            this.metroTile1.Location = new System.Drawing.Point(12, 20);
-            this.metroTile1.Name = "metroTile1";
-            this.metroTile1.Size = new System.Drawing.Size(75, 23);
-            this.metroTile1.TabIndex = 2;
-            this.metroTile1.Text = "국가명";
+            this.tCountryEnName.AutoSize = true;
+            this.tCountryEnName.Location = new System.Drawing.Point(60, 89);
+            this.tCountryEnName.Name = "tCountryEnName";
+            this.tCountryEnName.Size = new System.Drawing.Size(0, 0);
+            this.tCountryEnName.TabIndex = 9;
             // 
-            // metroTile2
+            // tContinent
             // 
-            this.metroTile2.Location = new System.Drawing.Point(323, 20);
-            this.metroTile2.Name = "metroTile2";
-            this.metroTile2.Size = new System.Drawing.Size(75, 23);
-            this.metroTile2.TabIndex = 2;
-            this.metroTile2.Text = "국가 위치";
+            this.tContinent.AutoSize = true;
+            this.tContinent.Location = new System.Drawing.Point(392, 57);
+            this.tContinent.Name = "tContinent";
+            this.tContinent.Size = new System.Drawing.Size(0, 0);
+            this.tContinent.TabIndex = 9;
             // 
-            // metroLabel2
+            // tCountryNmae
             // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(24, 57);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(30, 19);
-            this.metroLabel2.TabIndex = 3;
-            this.metroLabel2.Text = "한 :";
+            this.tCountryNmae.AutoSize = true;
+            this.tCountryNmae.Location = new System.Drawing.Point(60, 57);
+            this.tCountryNmae.Name = "tCountryNmae";
+            this.tCountryNmae.Size = new System.Drawing.Size(0, 0);
+            this.tCountryNmae.TabIndex = 9;
             // 
             // metroLabel3
             // 
@@ -235,6 +222,15 @@
             this.metroLabel4.TabIndex = 3;
             this.metroLabel4.Text = "대륙 :";
             // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(24, 57);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(30, 19);
+            this.metroLabel2.TabIndex = 3;
+            this.metroLabel2.Text = "한 :";
+            // 
             // metroTile3
             // 
             this.metroTile3.Location = new System.Drawing.Point(12, 149);
@@ -243,37 +239,29 @@
             this.metroTile3.TabIndex = 2;
             this.metroTile3.Text = "국가 정보";
             // 
-            // tCountryNmae
+            // metroTile2
             // 
-            this.tCountryNmae.AutoSize = true;
-            this.tCountryNmae.Location = new System.Drawing.Point(60, 57);
-            this.tCountryNmae.Name = "tCountryNmae";
-            this.tCountryNmae.Size = new System.Drawing.Size(0, 0);
-            this.tCountryNmae.TabIndex = 9;
+            this.metroTile2.Location = new System.Drawing.Point(323, 20);
+            this.metroTile2.Name = "metroTile2";
+            this.metroTile2.Size = new System.Drawing.Size(75, 23);
+            this.metroTile2.TabIndex = 2;
+            this.metroTile2.Text = "국가 위치";
             // 
-            // tContinent
+            // metroTile1
             // 
-            this.tContinent.AutoSize = true;
-            this.tContinent.Location = new System.Drawing.Point(392, 57);
-            this.tContinent.Name = "tContinent";
-            this.tContinent.Size = new System.Drawing.Size(0, 0);
-            this.tContinent.TabIndex = 9;
+            this.metroTile1.Location = new System.Drawing.Point(12, 20);
+            this.metroTile1.Name = "metroTile1";
+            this.metroTile1.Size = new System.Drawing.Size(75, 23);
+            this.metroTile1.TabIndex = 2;
+            this.metroTile1.Text = "국가명";
             // 
-            // tCountryEnName
+            // CountryImage
             // 
-            this.tCountryEnName.AutoSize = true;
-            this.tCountryEnName.Location = new System.Drawing.Point(60, 89);
-            this.tCountryEnName.Name = "tCountryEnName";
-            this.tCountryEnName.Size = new System.Drawing.Size(0, 0);
-            this.tCountryEnName.TabIndex = 9;
-            // 
-            // tBasic
-            // 
-            this.tBasic.AutoSize = true;
-            this.tBasic.Location = new System.Drawing.Point(35, 191);
-            this.tBasic.Name = "tBasic";
-            this.tBasic.Size = new System.Drawing.Size(0, 0);
-            this.tBasic.TabIndex = 9;
+            this.CountryImage.Location = new System.Drawing.Point(31, 29);
+            this.CountryImage.Name = "CountryImage";
+            this.CountryImage.Size = new System.Drawing.Size(164, 106);
+            this.CountryImage.TabIndex = 0;
+            this.CountryImage.TabStop = false;
             // 
             // MainForm
             // 
@@ -290,10 +278,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CountryImage)).EndInit();
             this.Tab.ResumeLayout(false);
             this.CountryInfo.ResumeLayout(false);
             this.CountryInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CountryImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -315,7 +303,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroTile metroTile2;
         private MetroFramework.Controls.MetroTile metroTile1;
-        private MetroFramework.Controls.MetroTabPage metroTabPage2;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroTile metroTile3;
         private MetroFramework.Controls.MetroLabel tBasic;

@@ -1,0 +1,13 @@
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\bin\Debug\TakeABus.exe.config
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\bin\Debug\TakeABus.exe
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\bin\Debug\TakeABus.pdb
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\bin\Debug\MetroFramework.dll
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\bin\Debug\MetroFramework.Fonts.dll
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\obj\Debug\TakeABus.csprojAssemblyReference.cache
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\obj\Debug\TakeABus.Properties.Resources.resources
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\obj\Debug\TakeABus.csproj.GenerateResource.cache
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\obj\Debug\TakeABus.csproj.CoreCompileInputs.cache
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\obj\Debug\TakeABus.csproj.CopyComplete
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\obj\Debug\TakeABus.exe
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\obj\Debug\TakeABus.pdb
+C:\PKNU2020\WinFromTest\TakeABus\TakeABus\obj\Debug\TakeABus.MainFrom.resources
