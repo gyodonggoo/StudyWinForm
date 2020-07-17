@@ -35,6 +35,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.GrdBooksTbl = new MetroFramework.Controls.MetroGrid();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.DateRelease = new MetroFramework.Controls.MetroDateTime();
             this.Divistion = new MetroFramework.Controls.MetroComboBox();
             this.BtnCancel = new MetroFramework.Controls.MetroButton();
             this.BtnSave = new MetroFramework.Controls.MetroButton();
@@ -51,7 +52,6 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.IDX = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.DateRelease = new MetroFramework.Controls.MetroDateTime();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -151,6 +151,14 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "상세";
+            // 
+            // DateRelease
+            // 
+            this.DateRelease.Location = new System.Drawing.Point(103, 173);
+            this.DateRelease.MinimumSize = new System.Drawing.Size(0, 29);
+            this.DateRelease.Name = "DateRelease";
+            this.DateRelease.Size = new System.Drawing.Size(264, 29);
+            this.DateRelease.TabIndex = 7;
             // 
             // Divistion
             // 
@@ -404,14 +412,6 @@
             this.metroLabel1.TabIndex = 0;
             this.metroLabel1.Text = "번호 :";
             this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // DateRelease
-            // 
-            this.DateRelease.Location = new System.Drawing.Point(103, 173);
-            this.DateRelease.MinimumSize = new System.Drawing.Size(0, 29);
-            this.DateRelease.Name = "DateRelease";
-            this.DateRelease.Size = new System.Drawing.Size(264, 29);
-            this.DateRelease.TabIndex = 7;
             // 
             // BooksMngForm
             // 

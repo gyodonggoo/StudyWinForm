@@ -58,5 +58,16 @@ namespace BookRentalShop
             form.Show();
             form.WindowState = FormWindowState.Maximized;
         }
+
+        private void RentalMng_Click(object sender, EventArgs e)
+        {
+            RentalMngForm form = new RentalMngForm();
+            ShowFormControl(form, "대여 관리");
+        }
+
+        private void PeopleMng_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

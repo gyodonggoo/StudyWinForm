@@ -33,9 +33,11 @@
             this.MnuMng = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuCoMng = new System.Windows.Forms.ToolStripMenuItem();
             this.BooksMange = new System.Windows.Forms.ToolStripMenuItem();
+            this.UserMng = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.MnuExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.UserMng = new System.Windows.Forms.ToolStripMenuItem();
+            this.RentalMng = new System.Windows.Forms.ToolStripMenuItem();
+            this.PeopleMng = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +57,8 @@
             this.MnuCoMng,
             this.BooksMange,
             this.UserMng,
+            this.RentalMng,
+            this.PeopleMng,
             this.toolStripMenuItem1,
             this.MnuExit});
             this.MnuMng.Name = "MnuMng";
@@ -75,6 +79,13 @@
             this.BooksMange.Text = "도서 관리 (&b)";
             this.BooksMange.Click += new System.EventHandler(this.BooksMange_Click);
             // 
+            // UserMng
+            // 
+            this.UserMng.Name = "UserMng";
+            this.UserMng.Size = new System.Drawing.Size(180, 22);
+            this.UserMng.Text = "회원 관리 (&m)";
+            this.UserMng.Click += new System.EventHandler(this.UserMng_Click);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -87,12 +98,19 @@
             this.MnuExit.Size = new System.Drawing.Size(180, 22);
             this.MnuExit.Text = "끝내기(&x)";
             // 
-            // UserMng
+            // RentalMng
             // 
-            this.UserMng.Name = "UserMng";
-            this.UserMng.Size = new System.Drawing.Size(180, 22);
-            this.UserMng.Text = "사용자 관리 (&u)";
-            this.UserMng.Click += new System.EventHandler(this.UserMng_Click);
+            this.RentalMng.Name = "RentalMng";
+            this.RentalMng.Size = new System.Drawing.Size(180, 22);
+            this.RentalMng.Text = "대여 관리 (&r)";
+            this.RentalMng.Click += new System.EventHandler(this.RentalMng_Click);
+            // 
+            // PeopleMng
+            // 
+            this.PeopleMng.Name = "PeopleMng";
+            this.PeopleMng.Size = new System.Drawing.Size(180, 22);
+            this.PeopleMng.Text = "사용자 관리 (&u)";
+            this.PeopleMng.Click += new System.EventHandler(this.PeopleMng_Click);
             // 
             // MainForm
             // 
@@ -126,6 +144,8 @@
         private System.Windows.Forms.ToolStripMenuItem MnuExit;
         private System.Windows.Forms.ToolStripMenuItem BooksMange;
         private System.Windows.Forms.ToolStripMenuItem UserMng;
+        private System.Windows.Forms.ToolStripMenuItem RentalMng;
+        private System.Windows.Forms.ToolStripMenuItem PeopleMng;
     }
 }
 

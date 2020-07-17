@@ -78,3 +78,4 @@ C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\obj\Debug\BookRentalShop.
 C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\obj\Debug\BookRentalShop.pdb
 C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\obj\Debug\BookRentalShop.SubItems.BooksMngForm.resources
 C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\obj\Debug\BookRentalShop.SubItems.UserMngForm.resources
+C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\obj\Debug\BookRentalShop.SubItems.REntalMngForm.resources

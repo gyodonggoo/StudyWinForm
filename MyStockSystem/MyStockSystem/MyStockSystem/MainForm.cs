@@ -33,5 +33,14 @@ namespace MyStockSystem
             searItem.ShowDialog();
             this.Close(); 
         }
+
+        private void MtlGalmetgilGuide_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            GalmetgilForm searItem = new GalmetgilForm();
+            searItem.Location = this.Location;
+            searItem.ShowDialog();
+            this.Close();
+        }
     }
 }

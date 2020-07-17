@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MtlStockAnal = new MetroFramework.Controls.MetroTile();
             this.MtlImvestSimuls = new MetroFramework.Controls.MetroTile();
+            this.MtlGalmetgilGuide = new MetroFramework.Controls.MetroTile();
             this.MtlSearchItem = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
@@ -58,6 +59,18 @@
             this.MtlImvestSimuls.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.MtlImvestSimuls.UseTileImage = true;
             // 
+            // MtlGalmetgilGuide
+            // 
+            this.MtlGalmetgilGuide.Location = new System.Drawing.Point(485, 63);
+            this.MtlGalmetgilGuide.Name = "MtlGalmetgilGuide";
+            this.MtlGalmetgilGuide.Size = new System.Drawing.Size(144, 150);
+            this.MtlGalmetgilGuide.TabIndex = 0;
+            this.MtlGalmetgilGuide.Text = "갈맷길 정보";
+            this.MtlGalmetgilGuide.TileImage = global::MyStockSystem.Properties.Resources.seagull2;
+            this.MtlGalmetgilGuide.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MtlGalmetgilGuide.UseTileImage = true;
+            this.MtlGalmetgilGuide.Click += new System.EventHandler(this.MtlGalmetgilGuide_Click);
+            // 
             // MtlSearchItem
             // 
             this.MtlSearchItem.Location = new System.Drawing.Point(23, 63);
@@ -78,6 +91,7 @@
             this.ClientSize = new System.Drawing.Size(1280, 720);
             this.Controls.Add(this.MtlStockAnal);
             this.Controls.Add(this.MtlImvestSimuls);
+            this.Controls.Add(this.MtlGalmetgilGuide);
             this.Controls.Add(this.MtlSearchItem);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -96,6 +110,7 @@
         private MetroFramework.Controls.MetroTile MtlSearchItem;
         private MetroFramework.Controls.MetroTile MtlStockAnal;
         private MetroFramework.Controls.MetroTile MtlImvestSimuls;
+        private MetroFramework.Controls.MetroTile MtlGalmetgilGuide;
     }
 }
 
