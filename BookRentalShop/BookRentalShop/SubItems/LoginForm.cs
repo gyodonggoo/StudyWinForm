@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.AccessControl;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using MetroFramework;
@@ -78,6 +79,7 @@ namespace BookRentalShop.SubItems
                     {
                         //결과값 set
                         resultID = reader["userid"] != null ? reader["userid"].ToString() : string.Empty;
+                        Commens.USERID = resultID;
                         MetroMessageBox.Show(this, $"{resultID} 로그인 성공");
                     }
                 }

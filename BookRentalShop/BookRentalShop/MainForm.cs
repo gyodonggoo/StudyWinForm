@@ -18,6 +18,7 @@ namespace BookRentalShop
         {
             LoginForm login = new LoginForm();
             login.ShowDialog();
+            UserID.Text = $"Login : {Commens.USERID}";
         }
 
         private void MainForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)

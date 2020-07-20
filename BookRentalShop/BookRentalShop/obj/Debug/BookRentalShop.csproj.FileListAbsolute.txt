@@ -79,3 +79,11 @@ C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\obj\Debug\BookRentalShop.
 C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\obj\Debug\BookRentalShop.SubItems.BooksMngForm.resources
 C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\obj\Debug\BookRentalShop.SubItems.UserMngForm.resources
 C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\obj\Debug\BookRentalShop.SubItems.REntalMngForm.resources
+C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\bin\Debug\NPOI.dll
+C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\bin\Debug\NPOI.OOXML.dll
+C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\bin\Debug\NPOI.OpenXml4Net.dll
+C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\bin\Debug\BouncyCastle.Crypto.xml
+C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\bin\Debug\ICSharpCode.SharpZipLib.pdb
+C:\PKNU2020\StudyWinForm\BookRentalShop\BookRentalShop\bin\Debug\ICSharpCode.SharpZipLib.xml

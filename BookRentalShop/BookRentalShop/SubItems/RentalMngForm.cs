@@ -1,10 +1,13 @@
-﻿using K4os.Compression.LZ4.Internal;
-using MetroFramework;
+﻿using MetroFramework;
 using MetroFramework.Forms;
 using MySql.Data.MySqlClient;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Windows.Forms;
 
 namespace BookRentalShop.SubItems
@@ -24,7 +27,7 @@ namespace BookRentalShop.SubItems
             UpdateComboMember();
             UpdateComboBook();
             //초기값 세팅
-            //UpdateData();
+            UpdateData();
             InitControls();
             GrdRentalTbl.ReadOnly = true;
         }
@@ -88,7 +91,19 @@ namespace BookRentalShop.SubItems
             using (MySqlConnection conn = new MySqlConnection(Commens.CONNSTR))
             {
                 //쿼리
-                string strQuery = $"SELECT * From {strTBLname}";
+                string strQuery = "SELECT r.idx AS '대여번호', "+
+                                  "       m.Names AS '대여회원', "+
+                                  "       b.Names AS '대여책제목', " +
+                                  "       b.ISBN, " +
+                                  "       r.rentalDate AS '대여일', " +
+                                  "       r.returnDate AS '반납일', " +
+                                  "       r.memberIdx, " +
+                                  "       r.bookIdx " +
+                                  "FROM rentaltbl AS r " +
+                                  "INNER JOIN membertbl AS m " +
+                                  "     ON r.memberIdx = m.Idx " +
+                                  "INNER JOIN bookstbl AS b " +
+                                  "     ON r.bookIdx = b.Idx";
                 conn.Open();
                 //커맨드 생성
                 MySqlCommand cmd = new MySqlCommand();
@@ -112,41 +127,45 @@ namespace BookRentalShop.SubItems
             DataGridViewColumn column;
 
             column = GrdRentalTbl.Columns[0];
-            column.Width = 150;
+            column.Width = 50;
             column.HeaderText = "번호";
 
             column = GrdRentalTbl.Columns[1];
-            column.Width = 150;
-            column.HeaderText = "이름";
+            column.Width = 110;
+            column.HeaderText = "회원";
 
             column = GrdRentalTbl.Columns[2];
             column.Width = 150;
-            column.HeaderText = "등급";
+            column.HeaderText = "책";
 
             column = GrdRentalTbl.Columns[3];
-            column.Width = 150;
-            column.HeaderText = "주소";
+            column.Width = 100;
+            column.HeaderText = "ISBN";
 
             column = GrdRentalTbl.Columns[4];
-            column.Width = 150;
+            column.Width = 120;
             column.HeaderText = "전화번호";
 
             column = GrdRentalTbl.Columns[5];
-            column.Width = 150;
-            column.HeaderText = "이메일";
+            column.Width = 100;
+
+            column = GrdRentalTbl.Columns[6];//memberidx
+            column.Visible = false;
+            column = GrdRentalTbl.Columns[7];//bookidx
+            column.Visible = false;
         }
         private void SaveData()
         {
             //빈값 비교
-            //if (string.IsNullOrEmpty(Names.Text)
+            //if (string.IsNullOrEmpty(IDX.Text)
             //    || Book.SelectedIndex < 1
             //    || string.IsNullOrEmpty(Addr.Text)
             //    || string.IsNullOrEmpty(Mobile.Text)
             //    || string.IsNullOrEmpty(Email.Text))
-            {
-                MetroMessageBox.Show(this, "빈값은 넣을 수 없습니다", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //{
+            //    MetroMessageBox.Show(this, "빈값은 넣을 수 없습니다", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
             if (myMode == BaseMode.NONE)
             {
@@ -167,61 +186,58 @@ namespace BookRentalShop.SubItems
                     //쿼리문
                     if (myMode == BaseMode.UPDATE)
                     {
-                        cmd.CommandText = $"UPDATE {strTBLname} " +
-                                          "SET " +
-                                          "     Names = @Names, " +
-                                          "     Levels = @Levels, " +
-                                          "     Addr = @Addr, " +
-                                          "     Mobile = @Mobile, " +
-                                          "     Email = @Email " +
-                                          "WHERE Idx = @Idx";
+                        cmd.CommandText = "UPDATE rentaltbl "+
+                                          "SET "+
+                                          "     memberIdx = @memberIdx, " +
+                                          "     bookIdx = @bookIdx, " +
+                                          "     rentalDate = @rentalDate, " +
+                                          "     returnDate = @returnDate " +
+                                          "WHERE " +
+                                          "      Idx = @Idx";
                     }
                     else if (myMode == BaseMode.INSERT)
                     {
-                        cmd.CommandText = $"INSERT INTO {strTBLname} " +
+                        cmd.CommandText = "INSERT INTO rentaltbl "+
                                           "(" +
-                                          "     Names, " +
-                                          "     Levels, " +
-                                          "     Addr, " +
-                                          "     Mobile, " +
-                                          "     Email" +
+                                          "     memberIdx, " +
+                                          "     bookIdx, " +
+                                          "     rentalDate, " +
+                                          "     returnDate " +
                                           ") " +
                                           "VALUES " +
                                           "(" +
-                                          "     @Names, " +
-                                          "     @Levels, " +
-                                          "     @Addr, " +
-                                          "     @Mobile, " +
-                                          "     @Email" +
-                                          ")";
+                                          "     @memberIdx, " +
+                                          "     @bookIdx, " +
+                                          "     @rentalDate, " +
+                                          "     @returnDate) ";
                     }
 
                     //쿼리문  파라미터 대입 실행
                     //파라미터 생성
-                    MySqlParameter paraNames = new MySqlParameter("@Names", MySqlDbType.VarChar, 45);
-                    MySqlParameter paraLevels = new MySqlParameter("@Levels", MySqlDbType.VarChar, 1);
-                    MySqlParameter paraAddr = new MySqlParameter("@Addr", MySqlDbType.VarChar, 100);
-                    MySqlParameter paraMobile = new MySqlParameter("@Mobile", MySqlDbType.VarChar, 13);
-                    MySqlParameter paraEmail = new MySqlParameter("@Email", MySqlDbType.VarChar, 50);
+                    MySqlParameter paramemberIdx = new MySqlParameter("@memberIdx", MySqlDbType.Int32);
+                    MySqlParameter parabookIdx = new MySqlParameter("@bookIdx", MySqlDbType.Int32);
+                    MySqlParameter pararentalDate = new MySqlParameter("@rentalDate", MySqlDbType.Date);
+                    MySqlParameter parareturnDate = new MySqlParameter("@returnDate", MySqlDbType.Date);
                     //파라미너 값 set
-                    //paraNames.Value = Names.Text;
-                    //paraLevels.Value = Book.Text;
-                    //paraAddr.Value = Addr.Text;
-                    //paraMobile.Value = Mobile.Text;
-                    //paraEmail.Value = Email.Text;
+                    paramemberIdx.Value = Member.SelectedValue;
+                    parabookIdx.Value = Book.SelectedValue;
+                    pararentalDate.Value = RentalDate.Value;
+                    if (myMode == BaseMode.INSERT)
+                        parareturnDate.Value = null;
+                    else
+                        parareturnDate.Value = ReturnDate.Value;
                     //쿼리문 파라미터 set
-                    cmd.Parameters.Add(paraNames);
-                    cmd.Parameters.Add(paraLevels);
-                    cmd.Parameters.Add(paraAddr);
-                    cmd.Parameters.Add(paraMobile);
-                    cmd.Parameters.Add(paraEmail);
+                    cmd.Parameters.Add(paramemberIdx);
+                    cmd.Parameters.Add(parabookIdx);
+                    cmd.Parameters.Add(pararentalDate);
+                    cmd.Parameters.Add(parareturnDate);
                     if (myMode == BaseMode.UPDATE)
                     {
                         MySqlParameter paraIdx = new MySqlParameter("@Idx", MySqlDbType.Int32);
                         paraIdx.Value = IDX.Text;
                         cmd.Parameters.Add(paraIdx);
                     }
-
+                    
                     //결과 값 몇개 실행 되었는가
                     var result = cmd.ExecuteNonQuery();
 
@@ -248,37 +264,21 @@ namespace BookRentalShop.SubItems
                 UpdateData();
             }
         }
-        private void GrbDevTbl_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //셀선택시 셀 내용 클릭시만 반응
-            if (e.RowIndex > -1)
-            {
-                DataGridViewRow data = GrdRentalTbl.Rows[e.RowIndex];
-                //ID
-                //IDX.Text = data.Cells[0].Value.ToString();
-                ////Names
-                //Names.Text = data.Cells[1].Value.ToString();
-                ////Levels
-                //Book.Text = data.Cells[2].Value.ToString();
-                ////Addr
-                //Addr.Text = data.Cells[3].Value.ToString();
-                ////Mobile
-                //Mobile.Text = data.Cells[4].Value.ToString();
-                ////Email
-                //Email.Text = data.Cells[5].Value.ToString();
-
-                //IDX.ReadOnly = true;
-                //myMode = BaseMode.UPDATE;//수정 모드 변경
-                //Names.Focus();
-            }
-        }
         private void InitControls()
         {
             //설정값 초기화
-            //IDX.Text = Names.Text = Email.Text = Mobile.Text = Addr.Text = string.Empty;
-            //Book.SelectedIndex = 0;
-            IDX.ReadOnly = true;
+            IDX.Text = String.Empty;
             IDX.Focus();
+            IDX.ReadOnly = true;
+
+            Member.SelectedIndex = Book.SelectedIndex = 0;
+
+            RentalDate.CustomFormat = "yyyy-MM-dd";
+            RentalDate.Format = DateTimePickerFormat.Custom;
+            RentalDate.Value = DateTime.Now;
+
+            ReturnDate.CustomFormat = " ";
+            ReturnDate.Format = DateTimePickerFormat.Custom;
 
             myMode = BaseMode.NONE;
         }
@@ -291,7 +291,83 @@ namespace BookRentalShop.SubItems
         {
             InitControls();
             myMode = BaseMode.INSERT;
-            //Names.Focus();
+        }
+
+        private void GrdRentalTbl_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //셀선택시 셀 내용 클릭시만 반응
+            if (e.RowIndex > -1)
+            {
+               DataGridViewRow data = GrdRentalTbl.Rows[e.RowIndex];
+                
+                IDX.Text = data.Cells[0].Value.ToString();
+                
+                Member.SelectedValue = data.Cells[6].Value.ToString();
+                
+                Book.SelectedValue = data.Cells[7].Value.ToString();
+                
+                RentalDate.Value = DateTime.Parse(data.Cells[4].Value.ToString());
+                
+                if(!string.IsNullOrEmpty(data.Cells[5].Value.ToString()))
+                {
+                    ReturnDate.CustomFormat = "yyyy-MM-dd";
+                    ReturnDate.Format = DateTimePickerFormat.Custom;
+                    ReturnDate.Value = DateTime.Parse(data.Cells[5].Value.ToString());
+                }
+                else
+                {
+                    ReturnDate.CustomFormat = "";
+                    ReturnDate.Format = DateTimePickerFormat.Custom;
+                        
+                }
+
+
+
+                myMode = BaseMode.UPDATE;//수정 모드 변경
+            }
+        }
+
+        private void ReturnDate_VisibleChanged(object sender, EventArgs e)
+        {
+            ReturnDate.CustomFormat = "yyyy-MM-dd";
+            ReturnDate.Format = DateTimePickerFormat.Custom;
+        }
+
+        private void Export_Click(object sender, EventArgs e)
+        {
+            //xlsx 일때
+            IWorkbook workbook = new XSSFWorkbook();
+            //xls 일때
+            //IWorkbook workbook = new HSSFWorkbook();
+            ISheet sheet1 = workbook.CreateSheet("Sheet1");
+            sheet1.CreateRow(0).CreateCell(0).SetCellValue("Rental Book Data");
+            int x = 1;
+
+            DataSet ds = GrdRentalTbl.DataSource as DataSet;
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                IRow row = sheet1.CreateRow(i);
+                for (int j = 0; j < ds.Tables[0].Rows[0].ItemArray.Length; j++)
+                {
+                    if (j == 4 || j == 5)
+                    {
+                        var value = string.IsNullOrEmpty(ds.Tables[0].Rows[i].ItemArray[j].ToString()) ?
+                            "" : ds.Tables[0].Rows[i].ItemArray[j].ToString().Substring(0, 10);
+                        row.CreateCell(j).SetCellValue(value);
+                    }
+                    else if (j > 5)
+                        break;
+                    else
+                    {
+                        row.CreateCell(j).SetCellValue(ds.Tables[0].Rows[i].ItemArray[j].ToString());
+                    }
+                }
+            }
+            FileStream file = File.Create(Environment.CurrentDirectory + $@"\export.xlsx");
+            workbook.Write(file);
+            file.Close();
+
+            MessageBox.Show("Export Done!!");
         }
     }
 }
